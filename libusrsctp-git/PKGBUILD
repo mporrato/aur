@@ -1,0 +1,35 @@
+# Maintainer: Maurizio Porrato <maurizio.porrato@gmail.com>
+
+pkgname=libusrsctp-git
+pkgver=r5.62ec7b6
+pkgrel=1
+pkgdesc="SCTP User-land Stack."
+arch=('i686' 'x86_64')
+url="http://sctp.fh-muenster.de/sctp-user-land-stack.html"
+license=('LGPL3')
+depends=('glibc')
+makedepends=('git' 'libtool' 'automake' 'autoconf' 'gcc' 'make')
+provides=(libusrsctp)
+
+folder=rumenta
+source=('git+https://github.com/rillian/libusrsctp')
+md5sums=('SKIP')
+_gitname="libusrsctp"
+
+pkgver() {
+  cd "$srcdir/${_gitname}"
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+  cd "$srcdir"/${_gitname}
+  ./bootstrap
+  ./configure --prefix=/usr
+  make
+}
+
+package() { 
+  cd "$srcdir"/${_gitname}
+  DESTDIR="$pkgdir/" make install
+} 
+
