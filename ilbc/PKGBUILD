@@ -1,4 +1,5 @@
-# Contributor: Maurizio Porrato <maurizio.porrato@gmail.com>
+# Maintainer: Maurizio Porrato <maurizio.porrato@gmail.com>
+
 pkgname=ilbc
 pkgver=rfc3951
 pkgrel=6
