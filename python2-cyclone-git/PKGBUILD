@@ -28,7 +28,7 @@ build() {
 
 package() {
   cd ${srcdir}/${_gitname}
-  python2 setup.py install --prefix=/usr --root=$pkgdir
+  python2 setup.py install --prefix=/usr --root=$pkgdir --optimize=1
 }
 
 
