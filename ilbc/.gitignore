@@ -3,4 +3,5 @@ pkg/
 *.src.tar.*
 *.pkg.tar.*
 *.log
-libusrsctp/
+extract-cfile.txt
+rfc3951.txt

@@ -2,13 +2,17 @@
 
 SCRIPT=`realpath $0`
 SCRIPTDIR=`dirname ${SCRIPT}`
+PKGDIRS=`find "${SCRIPTDIR}" -mindepth 2 -maxdepth 2 -type f -name PKGBUILD -printf "%h "`
 
-find "${SCRIPTDIR}" -maxdepth 2						\
-	\( -type d \( -name src -o -name pkg \) \) -o			\
-	\( -type f \( -name "*.src.tar.*" -o				\
-		      -name "*.pkg.tar.*" -o				\
-		      -name "*.log"					\
-		   \)							\
-	\)								\
-	-exec rm -rv \{\} \;
-
+curdir="${PWD}"
+for pkg in ${PKGDIRS} ; do
+	cd "$pkg"
+	if [ -e .gitignore ] ; then 
+		for ign in `grep -v '^#' .gitignore | sed -e 's:/$::g'` ; do
+			find "$pkg" -maxdepth 1 -name "$ign" -exec rm -rfv \{\} \;
+		done
+	else
+		echo "WARNING: Package ${pkg} has no .gitignore" 
+	fi
+done
+cd "$curdir"
