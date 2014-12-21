@@ -1,6 +1,6 @@
 # Maintainer: Maurizio Porrato <maurizio.porrato@gmail.com>
 
-pkgname=libwebsock-nothread
+pkgname=libwebsock-nothreads
 pkgver=1.0.4
 pkgrel=1
 pkgdesc="C library for easy WebSockets servers. Legacy version without threads support."
